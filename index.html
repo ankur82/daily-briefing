@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Market Briefing</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f0f2f5; color: #1a1a2e; min-height: 100vh; }
+
+  .header { background: linear-gradient(135deg, #0f3460 0%, #16213e 60%, #1a1a2e 100%); color: white; padding: 24px 28px 20px; }
+  .header-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; }
+  .header h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.3px; }
+  .header .subtitle { font-size: 13px; color: #94a3b8; margin-top: 3px; }
+  .badge { background: rgba(16,185,129,0.2); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.3); border-radius: 20px; font-size: 11px; font-weight: 600; padding: 3px 10px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 5px; }
+  .badge::before { content: '●'; font-size: 8px; }
+
+  .hero-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; padding: 18px 28px; background: #fff; border-bottom: 1px solid #e5e7eb; }
+  .hero-card { background: #f8fafc; border-radius: 10px; padding: 14px; border: 1px solid #e2e8f0; }
+  .hero-card .label { font-size: 11px; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .hero-card .value { font-size: 20px; font-weight: 700; color: #0f172a; line-height: 1; }
+  .hero-card .change { font-size: 12px; font-weight: 600; margin-top: 4px; }
+  .up { color: #10b981; }
+  .down { color: #ef4444; }
+  .neutral { color: #f59e0b; }
+  .hero-card .sub { font-size: 11px; color: #94a3b8; margin-top: 2px; }
+
+  .content { padding: 18px 28px; display: flex; flex-direction: column; gap: 18px; max-width: 1100px; margin: 0 auto; width: 100%; }
+
+  .section { background: white; border-radius: 12px; border: 1px solid #e5e7eb; overflow: hidden; }
+  .section-header { padding: 14px 18px; border-bottom: 1px solid #f1f5f9; display: flex; align-items: center; gap: 10px; background: #fafafa; }
+  .section-icon { width: 28px; height: 28px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+  .section-title { font-size: 13px; font-weight: 700; color: #0f172a; text-transform: uppercase; letter-spacing: 0.5px; }
+  .section-body { padding: 16px 18px; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; }
+
+  .sector-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+  .sector-tile { border-radius: 8px; padding: 10px 12px; }
+  .sector-tile.green-strong { background: #dcfce7; border: 1px solid #bbf7d0; }
+  .sector-tile.green-mild { background: #f0fdf4; border: 1px solid #d1fae5; }
+  .sector-tile.red-strong { background: #fee2e2; border: 1px solid #fca5a5; }
+  .sector-tile.red-mild { background: #fff5f5; border: 1px solid #fecaca; }
+  .sector-tile.neutral-t { background: #fef9c3; border: 1px solid #fde68a; }
+  .sector-tile .s-name { font-size: 11px; font-weight: 700; color: #374151; }
+  .sector-tile .s-val { font-size: 13px; font-weight: 700; margin-top: 2px; }
+
+  .risk-bar { height: 8px; border-radius: 4px; background: linear-gradient(to right, #10b981, #f59e0b, #ef4444); position: relative; margin: 10px 0; }
+  .risk-needle { width: 14px; height: 14px; border-radius: 50%; background: #1a1a2e; border: 2px solid white; box-shadow: 0 0 0 2px #1a1a2e; position: absolute; top: -3px; transform: translateX(-50%); }
+
+  .timeline { display: flex; flex-direction: column; gap: 10px; }
+  .tl-item { display: flex; gap: 12px; align-items: flex-start; }
+  .tl-dot { width: 8px; height: 8px; border-radius: 50%; background: #3b82f6; margin-top: 5px; flex-shrink: 0; }
+  .tl-dot.amber { background: #f59e0b; }
+  .tl-dot.green { background: #10b981; }
+  .tl-dot.red { background: #ef4444; }
+  .tl-content { font-size: 13px; color: #374151; line-height: 1.5; }
+  .tl-content strong { color: #0f172a; }
+
+  .flow-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .flow-label { width: 36px; font-size: 11px; font-weight: 700; color: #64748b; }
+  .flow-bar-wrap { flex: 1; background: #f1f5f9; border-radius: 4px; height: 20px; position: relative; overflow: hidden; }
+  .flow-bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 8px; font-size: 11px; font-weight: 700; color: white; }
+  .flow-bar-fill.sell { background: #ef4444; margin-left: auto; justify-content: flex-end; padding-right: 8px; padding-left: 0; }
+
+  .alert-red { background: #fef2f2; border-left: 4px solid #ef4444; color: #7f1d1d; }
+  .alert-amber { background: #fffbeb; border-left: 4px solid #f59e0b; color: #78350f; }
+  .alert-blue { background: #eff6ff; border-left: 4px solid #3b82f6; color: #1e3a5f; }
+  .alert-green { background: #f0fdf4; border-left: 4px solid #10b981; color: #14532d; }
+
+  .kl-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .kl-table th { background: #f8fafc; color: #64748b; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 10px; text-align: left; border-bottom: 1px solid #e5e7eb; }
+  .kl-table td { padding: 9px 10px; border-bottom: 1px solid #f1f5f9; color: #374151; }
+  .kl-table tr:last-child td { border-bottom: none; }
+  .pill { display: inline-block; border-radius: 4px; padding: 2px 7px; font-size: 11px; font-weight: 600; }
+  .pill-support { background: #dcfce7; color: #166534; }
+  .pill-resist { background: #fee2e2; color: #991b1b; }
+  .pill-watch { background: #fef3c7; color: #92400e; }
+
+  .global-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
+  .gi-card { background: #f8fafc; border-radius: 8px; padding: 10px 12px; border: 1px solid #e2e8f0; }
+  .gi-name { font-size: 11px; color: #64748b; font-weight: 600; }
+  .gi-val { font-size: 14px; font-weight: 700; color: #0f172a; margin-top: 2px; }
+  .gi-chg { font-size: 12px; font-weight: 600; margin-top: 1px; }
+
+  .footer { padding: 14px 28px; text-align: center; font-size: 11px; color: #94a3b8; border-top: 1px solid #e5e7eb; background: white; }
+  .footer a { color: #3b82f6; text-decoration: none; }
+  .tag { display: inline-block; background: #f1f5f9; color: #475569; border-radius: 4px; font-size: 10px; font-weight: 600; padding: 2px 6px; margin-left: 6px; text-transform: uppercase; letter-spacing: 0.3px; }
+
+  @media (max-width: 640px) {
+    .hero-cards { grid-template-columns: repeat(2, 1fr); padding: 14px; }
+    .content { padding: 12px 14px; }
+    .two-col, .three-col { grid-template-columns: 1fr; }
+    .section-body { padding: 12px 14px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div>
+      <h1>📊 Daily Market Briefing</h1>
+      <div class="subtitle">Monday, April 27, 2026 &nbsp;|&nbsp; India Focus Edition</div>
+    </div>
+    <div class="badge">April 27, 2026</div>
+  </div>
+</div>
+
+<div class="hero-cards">
+  <div class="hero-card">
+    <div class="label">Nifty 50</div>
+    <div class="value">23,898</div>
+    <div class="change down">▼ ~1.0% (Fri Close)</div>
+    <div class="sub">GIFT Nifty: 24,129 ▲ +206 pts</div>
+  </div>
+  <div class="hero-card">
+    <div class="label">Sensex</div>
+    <div class="value">76,664</div>
+    <div class="change down">▼ ~1.0% (Fri Close)</div>
+    <div class="sub">Gap-up open expected</div>
+  </div>
+  <div class="hero-card">
+    <div class="label">Rupee (USD/INR)</div>
+    <div class="value">92.58</div>
+    <div class="change up">▲ +40p recovery</div>
+    <div class="sub">Earlier hit ₹93+ on tensions</div>
+  </div>
+  <div class="hero-card">
+    <div class="label">Gold (USD/oz)</div>
+    <div class="value">~$4,820</div>
+    <div class="change neutral">▶ Consolidating</div>
+    <div class="sub">Range: $4,760–$4,880</div>
+  </div>
+  <div class="hero-card">
+    <div class="label">Brent Crude</div>
+    <div class="value">~$107</div>
+    <div class="change down">▲ +2% (Hormuz risk)</div>
+    <div class="sub">US-Iran talks stalled</div>
+  </div>
+  <div class="hero-card">
+    <div class="label">India VIX</div>
+    <div class="value">Elevated</div>
+    <div class="change down">▲ +18.5% spike</div>
+    <div class="sub">Post-Kashmir attack</div>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:#eff6ff;">🗒️</div>
+      <div class="section-title">Executive Summary</div>
+    </div>
+    <div class="section-body">
+      <div class="alert-blue" style="border-radius:8px; padding:12px 14px; margin-bottom:12px; font-size:13px; line-height:1.6;">
+        <strong>Opening Tone: Cautiously Positive.</strong> GIFT Nifty signals a gap-up open of ~200 points (to ~24,100), reversing Friday's weakness. Markets are balancing positive Asia cues (Nikkei +0.88%, Kospi +1.19% — record highs) against ongoing geopolitical headwinds from the India-Pakistan border situation and elevated Brent crude near $107 on stalled US-Iran talks.
+      </div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot green"></div><div class="tl-content"><strong>Asia cues broadly positive:</strong> Nikkei 225 &amp; Kospi hit record highs. Iran reportedly submitted a Hormuz reopening proposal to the US, lifting risk sentiment across Asian markets.</div></div>
+        <div class="tl-item"><div class="tl-dot amber"></div><div class="tl-content"><strong>India-Pakistan risk lingers:</strong> After the April 22 Pahalgam terror attack (26 killed), India suspended the 1960 Indus Waters Treaty and downgraded diplomatic ties. India VIX spiked 18.5%.</div></div>
+        <div class="tl-item"><div class="tl-dot amber"></div><div class="tl-content"><strong>Q4 FY26 earnings season in full swing:</strong> 180+ companies reporting this week — Coal India, Maruti Suzuki, Kotak Mahindra Bank, HUL, Adani Ports among marquee names.</div></div>
+        <div class="tl-item"><div class="tl-dot red"></div><div class="tl-content"><strong>Crude oil risk:</strong> Brent near $107 — every $10/bbl rise adds ~0.3–0.4% to fiscal deficit. US-Iran talks stalled. Watch for Hormuz resolution as key positive catalyst.</div></div>
+        <div class="tl-item"><div class="tl-dot green"></div><div class="tl-content"><strong>RBI macro stable:</strong> Repo at 5.25%. GDP growth FY27 at 6.9%. Trade deficit at 9-month low. FX reserves cover ~11 months of imports.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:#f0fdf4;">📐</div>
+        <div class="section-title">Key Technical Levels</div>
+      </div>
+      <div class="section-body">
+        <table class="kl-table">
+          <thead><tr><th>Index / Asset</th><th>Level</th><th>Type</th></tr></thead>
+          <tbody>
+            <tr><td>Nifty 50</td><td>~24,100</td><td><span class="pill pill-watch">GIFT Gap-Up Target</span></td></tr>
+            <tr><td>Nifty 50</td><td>23,600 – 23,400</td><td><span class="pill pill-support">Strong Support</span></td></tr>
+            <tr><td>Nifty 50</td><td>24,500 – 25,000</td><td><span class="pill pill-resist">Key Resistance</span></td></tr>
+            <tr><td>Sensex</td><td>76,000 – 75,600</td><td><span class="pill pill-support">Support Zone</span></td></tr>
+            <tr><td>Sensex</td><td>77,500 – 78,000</td><td><span class="pill pill-resist">Resistance</span></td></tr>
+            <tr><td>USD/INR</td><td>92.00 – 91.50</td><td><span class="pill pill-support">Rupee Support</span></td></tr>
+            <tr><td>USD/INR</td><td>93.50+</td><td><span class="pill pill-resist">Watch Level</span></td></tr>
+            <tr><td>Brent Crude</td><td>$107</td><td><span class="pill pill-watch">Inflation Risk</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:#fefce8;">🌏</div>
+        <div class="section-title">Global Indices — Morning</div>
+      </div>
+      <div class="section-body">
+        <div class="global-grid">
+          <div class="gi-card"><div class="gi-name">Nikkei 225</div><div class="gi-val">Record High</div><div class="gi-chg up">▲ +0.88%</div></div>
+          <div class="gi-card"><div class="gi-name">Topix</div><div class="gi-val">Japan</div><div class="gi-chg up">▲ +0.63%</div></div>
+          <div class="gi-card"><div class="gi-name">Kospi</div><div class="gi-val">Record High</div><div class="gi-chg up">▲ +1.19%</div></div>
+          <div class="gi-card"><div class="gi-name">Kosdaq</div><div class="gi-val">Korea Small</div><div class="gi-chg up">▲ +1.14%</div></div>
+          <div class="gi-card"><div class="gi-name">Hang Seng</div><div class="gi-val">Hong Kong</div><div class="gi-chg up">▲ +0.22%</div></div>
+          <div class="gi-card"><div class="gi-name">CSI 300</div><div class="gi-val">China A</div><div class="gi-chg neutral">▶ Marginally lower</div></div>
+          <div class="gi-card"><div class="gi-name">Fed Funds</div><div class="gi-val">3.50–3.75%</div><div class="gi-chg neutral">Hold expected</div></div>
+          <div class="gi-card"><div class="gi-name">DXY (USD)</div><div class="gi-val">~High 90s</div><div class="gi-chg neutral">▶ Consolidating</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:#f5f3ff;">🏭</div>
+      <div class="section-title">Sectoral Snapshot</div>
+      <span class="tag">April Month-to-Date</span>
+    </div>
+    <div class="section-body">
+      <div class="sector-grid">
+        <div class="sector-tile green-strong"><div class="s-name">Banking</div><div class="s-val up">▲ +12% MTD</div></div>
+        <div class="sector-tile green-strong"><div class="s-name">Fin. Services</div><div class="s-val up">▲ +12.5% MTD</div></div>
+        <div class="sector-tile red-mild"><div class="s-name">FMCG</div><div class="s-val down">▼ FII selling</div></div>
+        <div class="sector-tile red-mild"><div class="s-name">IT / Tech</div><div class="s-val down">▼ FII outflows</div></div>
+        <div class="sector-tile red-mild"><div class="s-name">Metals</div><div class="s-val down">▼ Selling pressure</div></div>
+        <div class="sector-tile red-mild"><div class="s-name">Realty</div><div class="s-val down">▼ Under pressure</div></div>
+        <div class="sector-tile red-mild"><div class="s-name">Telecom</div><div class="s-val down">▼ Under pressure</div></div>
+        <div class="sector-tile neutral-t"><div class="s-name">Pharma</div><div class="s-val neutral">▶ Mixed</div></div>
+        <div class="sector-tile neutral-t"><div class="s-name">Auto</div><div class="s-val neutral">▼ ₹3,704Cr outflow</div></div>
+        <div class="sector-tile red-mild"><div class="s-name">Oil &amp; Gas</div><div class="s-val down">▼ Crude headwind</div></div>
+        <div class="sector-tile neutral-t"><div class="s-name">Consumer Svcs</div><div class="s-val neutral">▼ ₹5,336Cr outflow</div></div>
+        <div class="sector-tile neutral-t"><div class="s-name">Healthcare</div><div class="s-val neutral">▼ ₹4,481Cr outflow</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:#fef2f2;">📉</div>
+        <div class="section-title">FII / DII Flows — April MTD</div>
+      </div>
+      <div class="section-body">
+        <div style="margin-bottom:14px;">
+          <div style="font-size:12px; color:#64748b; margin-bottom:10px;">Net flows (₹ Bn, mid-April data)</div>
+          <div class="flow-row"><div class="flow-label" style="color:#ef4444;">FII</div><div class="flow-bar-wrap"><div class="flow-bar-fill sell" style="width:78%;">▼ ₹392 Bn sold</div></div></div>
+          <div class="flow-row"><div class="flow-label" style="color:#10b981;">DII</div><div class="flow-bar-wrap"><div class="flow-bar-fill" style="width:56%; background:#10b981;">▲ ₹297 Bn bought</div></div></div>
+        </div>
+        <div class="alert-green" style="border-radius:8px; padding:10px 12px; font-size:12px; line-height:1.5;">
+          <strong>Encouraging shift:</strong> FIIs turned net buyers in last 3 sessions (₹17.3 Bn), signalling improving sentiment on Iran ceasefire news.
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:#f0fdf4;">🏦</div>
+        <div class="section-title">RBI &amp; Macro Pulse</div>
+      </div>
+      <div class="section-body">
+        <div class="timeline">
+          <div class="tl-item"><div class="tl-dot green"></div><div class="tl-content"><strong>Repo Rate: 5.25% (Unchanged)</strong> — April MPC held. Inflation from Middle East &amp; weather uncertainty kept RBI cautious.</div></div>
+          <div class="tl-item"><div class="tl-dot amber"></div><div class="tl-content"><strong>CPI Inflation FY27:</strong> Projected 4.6%; Q3 spike to 5.2% expected. Supply risks from West Asia &amp; monsoon.</div></div>
+          <div class="tl-item"><div class="tl-dot green"></div><div class="tl-content"><strong>GDP Growth FY27:</strong> 6.9%. Trade deficit at 9-month low. FX reserves = ~11 months import cover.</div></div>
+          <div class="tl-item"><div class="tl-dot amber"></div><div class="tl-content"><strong>Rupee ₹92.58/USD</strong> — up 40p on ceasefire news; earlier hit ₹93+. RBI capped bank NOP at $100M.</div></div>
+          <div class="tl-item"><div class="tl-dot red"></div><div class="tl-content"><strong>RBI rebuilding FX reserves</strong> — INR may lag regional peers near-term as RBI buys dollars.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:#fef2f2;">⚠️</div>
+      <div class="section-title">Geopolitical Risk Monitor</div>
+    </div>
+    <div class="section-body">
+      <div class="two-col">
+        <div>
+          <div class="alert-red" style="border-radius:8px; padding:12px 14px; margin-bottom:10px; font-size:13px; line-height:1.6;">
+            <strong>🇮🇳🇵🇰 India-Pakistan: ELEVATED RISK</strong><br>
+            April 22 Pahalgam attack (26 killed) prompted India to suspend the Indus Waters Treaty — an unprecedented escalation. VIX +18.5%; Rupee hit ₹93+. Markets historically resilient (&lt;2% sustained) but treaty suspension is a new duration risk.
+          </div>
+          <div style="font-size:12px; color:#64748b;"><strong>Potential plays:</strong> Defence PSUs (HAL, BEL, Bharat Dynamics). Domestic-demand sectors as defensive plays.</div>
+        </div>
+        <div>
+          <div class="alert-amber" style="border-radius:8px; padding:12px 14px; margin-bottom:10px; font-size:13px; line-height:1.6;">
+            <strong>🛢️ US-Iran / Strait of Hormuz: MODERATE-HIGH</strong><br>
+            Iran submitted Hormuz reopening proposal — talks stalled; Brent near $107. Every $10/bbl adds ~0.3–0.4% to India's fiscal deficit. Hormuz resolution = single biggest positive catalyst for India.
+          </div>
+          <div class="alert-blue" style="border-radius:8px; padding:10px 12px; font-size:12px; line-height:1.5;">
+            <strong>🇺🇸 US Macro:</strong> FOMC expected to hold at 3.50–3.75%. Payrolls fell 92K in Feb; unemployment 4.4%. Limited RBI room to cut rates.
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:14px;">
+        <div style="font-size:12px; font-weight:700; color:#374151; margin-bottom:6px;">Overall India Market Risk: <span style="color:#f59e0b;">Moderate-Elevated</span></div>
+        <div class="risk-bar"><div class="risk-needle" style="left:62%;"></div></div>
+        <div style="display:flex; justify-content:space-between; font-size:10px; color:#94a3b8; margin-top:2px;"><span>Low Risk</span><span>Moderate</span><span>High Risk</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:#fefce8;">📅</div>
+      <div class="section-title">Q4 FY26 Earnings — Week of April 27</div>
+      <span class="tag">180+ Companies</span>
+    </div>
+    <div class="section-body">
+      <div class="two-col">
+        <div>
+          <div style="font-size:12px; font-weight:600; color:#374151; margin-bottom:8px;">Major Results This Week</div>
+          <div class="timeline">
+            <div class="tl-item"><div class="tl-dot green"></div><div class="tl-content"><strong>Coal India</strong> — Volume &amp; realization; energy sector read-through</div></div>
+            <div class="tl-item"><div class="tl-dot green"></div><div class="tl-content"><strong>Maruti Suzuki</strong> — Volume, ASPs, rural demand barometer</div></div>
+            <div class="tl-item"><div class="tl-dot green"></div><div class="tl-content"><strong>Kotak Mahindra Bank</strong> — NIM trajectory, credit growth guidance</div></div>
+            <div class="tl-item"><div class="tl-dot green"></div><div class="tl-content"><strong>Bajaj Housing Finance</strong> — Housing credit momentum; rate sensitivity</div></div>
+            <div class="tl-item"><div class="tl-dot green"></div><div class="tl-content"><strong>Hindustan Unilever (HUL)</strong> — Rural recovery, volume vs. pricing mix</div></div>
+            <div class="tl-item"><div class="tl-dot green"></div><div class="tl-content"><strong>Adani Ports &amp; SEZ</strong> — Trade volume indicator; capex update</div></div>
+            <div class="tl-item"><div class="tl-dot green"></div><div class="tl-content"><strong>Varun Beverages, Eternal</strong> — Consumer discretionary demand</div></div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:12px; font-weight:600; color:#374151; margin-bottom:8px;">Sector Themes</div>
+          <div class="alert-amber" style="border-radius:8px; padding:10px 12px; font-size:12px; margin-bottom:8px;"><strong>Banking:</strong> Credit growth 13–15% YoY, but NIM squeeze from deposit costs. Watch rate-cut guidance.</div>
+          <div class="alert-blue" style="border-radius:8px; padding:10px 12px; font-size:12px; margin-bottom:8px;"><strong>FMCG / Consumer:</strong> Rural recovery vs urban moderation. Volume growth is key metric.</div>
+          <div class="alert-green" style="border-radius:8px; padding:10px 12px; font-size:12px;"><strong>Infra / Capital Goods:</strong> Order book momentum &amp; government capex continuity.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:#f0fdf4;">🔭</div>
+      <div class="section-title">What to Watch This Week</div>
+    </div>
+    <div class="section-body">
+      <div class="three-col">
+        <div>
+          <div style="font-size:12px; font-weight:700; color:#0f172a; margin-bottom:8px;">🇮🇳 India Macro</div>
+          <div class="timeline">
+            <div class="tl-item"><div class="tl-dot green"></div><div class="tl-content">RBI commentary on inflation trajectory &amp; rupee management</div></div>
+            <div class="tl-item"><div class="tl-dot amber"></div><div class="tl-content">Rupee direction — ₹92–93 range; RBI reserve rebuild pace</div></div>
+            <div class="tl-item"><div class="tl-dot amber"></div><div class="tl-content">India-Pakistan — any de-escalation = market positive</div></div>
+            <div class="tl-item"><div class="tl-dot green"></div><div class="tl-content">IMD 2026 monsoon seasonal outlook due</div></div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:12px; font-weight:700; color:#0f172a; margin-bottom:8px;">🌐 Global Events</div>
+          <div class="timeline">
+            <div class="tl-item"><div class="tl-dot red"></div><div class="tl-content">US-Iran Hormuz outcome — biggest oil price catalyst</div></div>
+            <div class="tl-item"><div class="tl-dot amber"></div><div class="tl-content">FOMC rate decision &amp; guidance tone</div></div>
+            <div class="tl-item"><div class="tl-dot amber"></div><div class="tl-content">US payrolls, CPI, retail sales for April</div></div>
+            <div class="tl-item"><div class="tl-dot green"></div><div class="tl-content">China PMI — read-through for Indian metals &amp; IT</div></div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:12px; font-weight:700; color:#0f172a; margin-bottom:8px;">📈 Sector Watch</div>
+          <div class="timeline">
+            <div class="tl-item"><div class="tl-dot green"></div><div class="tl-content"><strong>Nifty Bank:</strong> +12% YTD — sustainability hinges on earnings beats</div></div>
+            <div class="tl-item"><div class="tl-dot amber"></div><div class="tl-content"><strong>IT:</strong> Watch TCS/HCL FY27 demand guidance</div></div>
+            <div class="tl-item"><div class="tl-dot red"></div><div class="tl-content"><strong>OMCs:</strong> Crude $107 = under-recovery risk for BPCL, HPCL</div></div>
+            <div class="tl-item"><div class="tl-dot green"></div><div class="tl-content"><strong>Defence PSUs:</strong> HAL, BEL, MDL — geopolitical interest</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Generated: Monday, April 27, 2026 &nbsp;|&nbsp; Auto-published via Claude &nbsp;|&nbsp;
+  <a href="https://www.business-standard.com" target="_blank">Business Standard</a> &nbsp;·&nbsp;
+  <a href="https://apacnewsnetwork.com/2026/04/rbi-april-2026-policy-update-repo-rate-unchanged-at-5-25-amid-global-tensions/" target="_blank">RBI Policy</a> &nbsp;·&nbsp;
+  <a href="https://www.bloomberg.com" target="_blank">Bloomberg</a>
+  <br><br>
+  <span style="color:#cbd5e1;">For informational purposes only. Not investment advice.</span>
+</div>
+
+</body>
+</html>
