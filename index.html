@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+<!DOCTYPE html><script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Daily Market Briefing",
+  "schemaVersion": 1,
+  "description": "Daily market briefing dashboard for April 29, 2026 — India equities, global indices, bond yields, oil prices, currency, and macro themes. Updated each morning by the scheduled task."
+}
+</script>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -13,11 +19,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .header { background: #fff; border: 0.5px solid #e0ddd5; border-radius: 12px; padding: 18px 22px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
 .header h1 { font-size: 17px; font-weight: 500; color: #1a1a18; margin-bottom: 3px; }
 .header p { font-size: 12px; color: #888780; }
-.macro-pill { background: #fef8ec; border: 0.5px solid #e0b84a; border-radius: 8px; padding: 8px 12px; font-size: 11px; color: #7a5200; line-height: 1.5; max-width: 260px; flex-shrink: 0; }
+.macro-pill { background: #fef8ec; border: 0.5px solid #e0b84a; border-radius: 8px; padding: 8px 12px; font-size: 11px; color: #7a5200; line-height: 1.5; max-width: 280px; flex-shrink: 0; }
 .macro-pill strong { font-weight: 500; display: block; margin-bottom: 2px; color: #5c3c00; }
-.open-alert { background: #fdf2f2; border: 0.5px solid #e8b8b8; border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
-.dot { width: 7px; height: 7px; border-radius: 50%; background: #b03030; flex-shrink: 0; }
-.open-alert span { font-size: 12px; color: #7a2020; line-height: 1.4; }
+.open-alert { background: #f2fdf4; border: 0.5px solid #a8d8b0; border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+.dot { width: 7px; height: 7px; border-radius: 50%; background: #2a7035; flex-shrink: 0; }
+.open-alert span { font-size: 12px; color: #1a4f22; line-height: 1.4; }
 .section-label { font-size: 10px; font-weight: 500; color: #aaa89f; text-transform: uppercase; letter-spacing: 0.07em; margin: 18px 0 8px; }
 .grid { display: grid; gap: 10px; }
 .g4 { grid-template-columns: repeat(4, 1fr); }
@@ -51,115 +57,161 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 </head>
 <body>
 
-<h2 class="sr-only">Daily market briefing for 28 April 2026 covering India and global indices, bond yields, oil, and macro themes.</h2>
+<h2 class="sr-only">Daily market briefing for 29 April 2026 covering India and global indices, bond yields, FX, commodities, sector performance, and macro themes.</h2>
 
 <div class="header">
   <div>
     <h1>Daily Market Briefing</h1>
-    <p>Tuesday, 28 April 2026 &nbsp;·&nbsp; India &amp; Global</p>
+    <p>Wednesday, 29 April 2026 &nbsp;·&nbsp; India &amp; Global</p>
   </div>
   <div class="macro-pill">
     <strong>Macro theme</strong>
-    US-Iran war week 9. Hormuz peace talks collapsed overnight — Trump rejected Iran's proposal. Oil at $106/bbl, stagflation risk elevated.
+    US-Iran war enters week 9. UAE signals OPEC exit in May — geopolitical realignment accelerates. Hormuz risk premium holds; Brent near $111/bbl.
   </div>
 </div>
 
 <div class="open-alert">
   <div class="dot"></div>
-  <span><strong>India open signal:</strong> GIFT Nifty 24,042 — ~74 pts below Monday's Nifty close of 24,093. Cautious/negative open expected.</span>
+  <span><strong>India open signal:</strong> GIFT Nifty 24,117 — ~121 pts above Tuesday's Nifty close of 23,996. Positive open confirmed; Nifty reclaiming 24,200+ with Sensex up 1,000+ pts intraday.</span>
 </div>
 
-<div class="section-label">India equities — Monday close</div>
+<div class="section-label">India equities — 29 April intraday</div>
 <div class="grid g4">
   <div class="card">
     <div class="card-lbl">Nifty 50</div>
-    <div class="card-val">24,093</div>
-    <div class="card-sub up">+194.8 pts &nbsp;+0.81%</div>
+    <div class="card-val">24,233</div>
+    <div class="card-sub up">+238 pts &nbsp;+0.99%</div>
   </div>
   <div class="card">
     <div class="card-lbl">Sensex</div>
-    <div class="card-val">77,304</div>
-    <div class="card-sub up">+639.4 pts &nbsp;+0.83%</div>
+    <div class="card-val">77,917</div>
+    <div class="card-sub up">+1,031 pts &nbsp;+1.34%</div>
   </div>
   <div class="card">
-    <div class="card-lbl">India 10Y G-Sec</div>
-    <div class="card-val">6.95%</div>
-    <div class="card-sub nu">Range 6.85–7.02%</div>
+    <div class="card-lbl">Bank Nifty</div>
+    <div class="card-val">55,400</div>
+    <div class="card-sub nu">Consolidating · RSI 48</div>
   </div>
   <div class="card">
-    <div class="card-lbl">USD / INR</div>
-    <div class="card-val">94.21</div>
-    <div class="card-sub wn">Elevated vs ~83 last year</div>
+    <div class="card-lbl">Nifty Midcap 100</div>
+    <div class="card-val">60,741</div>
+    <div class="card-sub up">+321 pts &nbsp;+0.53%</div>
   </div>
 </div>
 
-<div class="section-label">Global equities — Monday close</div>
+<div class="section-label">Global equities — latest close</div>
 <div class="grid g4">
   <div class="card">
     <div class="card-lbl">S&amp;P 500</div>
-    <div class="card-val">7,174</div>
-    <div class="card-sub up">+0.12% · Record high</div>
+    <div class="card-val">7,138</div>
+    <div class="card-sub dn">−35.3 pts &nbsp;−0.49%</div>
   </div>
   <div class="card">
     <div class="card-lbl">Nasdaq</div>
-    <div class="card-val">24,887</div>
-    <div class="card-sub up">+0.20% · Record high</div>
+    <div class="card-val">24,663</div>
+    <div class="card-sub dn">−224.7 pts &nbsp;−0.90%</div>
   </div>
   <div class="card">
     <div class="card-lbl">Dow Jones</div>
-    <div class="card-val">49,168</div>
-    <div class="card-sub dn">−62.9 pts &nbsp;−0.13%</div>
+    <div class="card-val">49,141</div>
+    <div class="card-sub dn">−26.3 pts &nbsp;−0.05%</div>
   </div>
   <div class="card">
-    <div class="card-lbl">US 10Y Treasury</div>
-    <div class="card-val">4.34%</div>
-    <div class="card-sub dn">+3bps · Grinding higher</div>
+    <div class="card-lbl">FTSE 100</div>
+    <div class="card-val">10,332</div>
+    <div class="card-sub up">+11.1 pts &nbsp;+0.11%</div>
   </div>
 </div>
-
-<div class="section-label">Commodities &amp; Asia</div>
-<div class="grid g4">
+<div class="grid g4" style="margin-top:10px;">
   <div class="card">
-    <div class="card-lbl">Brent Crude</div>
-    <div class="card-val">$106</div>
-    <div class="card-sub wn">+55% since war · EIA peak $115</div>
+    <div class="card-lbl">DAX</div>
+    <div class="card-val">24,018</div>
+    <div class="card-sub dn">−65.2 pts &nbsp;−0.27%</div>
   </div>
   <div class="card">
-    <div class="card-lbl">WTI Crude</div>
-    <div class="card-val">$96</div>
-    <div class="card-sub wn">+27% since Feb 28</div>
+    <div class="card-lbl">Nikkei 225</div>
+    <div class="card-val">59,917</div>
+    <div class="card-sub dn">−617.0 pts &nbsp;−1.02%</div>
   </div>
   <div class="card">
     <div class="card-lbl">Hang Seng</div>
-    <div class="card-val">−0.61%</div>
-    <div class="card-sub dn">CSI 300 −0.28%</div>
+    <div class="card-val">26,029</div>
+    <div class="card-sub up">+350.2 pts &nbsp;+1.36%</div>
   </div>
   <div class="card">
-    <div class="card-lbl">ASX 200</div>
-    <div class="card-val">−0.29%</div>
-    <div class="card-sub nu">RBI repo: 5.25% (hold)</div>
+    <div class="card-lbl">Shanghai Comp.</div>
+    <div class="card-val">3,318</div>
+    <div class="card-sub up">+13.4 pts &nbsp;+0.41%</div>
   </div>
 </div>
 
-<div class="section-label">Monday performance — % change</div>
+<div class="section-label">Fixed income &amp; FX</div>
+<div class="grid g4">
+  <div class="card">
+    <div class="card-lbl">US 10Y Treasury</div>
+    <div class="card-val">4.35%</div>
+    <div class="card-sub wn">+2bps · 1-month high</div>
+  </div>
+  <div class="card">
+    <div class="card-lbl">India 10Y G-Sec</div>
+    <div class="card-val">6.97%</div>
+    <div class="card-sub wn">Range 6.85–7.02%</div>
+  </div>
+  <div class="card">
+    <div class="card-lbl">USD / INR</div>
+    <div class="card-val">94.77</div>
+    <div class="card-sub dn">+0.53% · vs ~83 yr-ago</div>
+  </div>
+  <div class="card">
+    <div class="card-lbl">DXY Index</div>
+    <div class="card-val">98.66</div>
+    <div class="card-sub nu">EUR/USD ~1.065</div>
+  </div>
+</div>
+
+<div class="section-label">Commodities</div>
+<div class="grid g4">
+  <div class="card">
+    <div class="card-lbl">Brent Crude</div>
+    <div class="card-val">$111.16</div>
+    <div class="card-sub wn">+2.71% · Hormuz premium</div>
+  </div>
+  <div class="card">
+    <div class="card-lbl">WTI Crude</div>
+    <div class="card-val">$99.32</div>
+    <div class="card-sub dn">−0.61% · Still elevated</div>
+  </div>
+  <div class="card">
+    <div class="card-lbl">Gold Spot</div>
+    <div class="card-val">$4,580</div>
+    <div class="card-sub dn">−2.0% · Off record high</div>
+  </div>
+  <div class="card">
+    <div class="card-lbl">Brent/Nifty Watch</div>
+    <div class="card-val">+63%</div>
+    <div class="card-sub wn">vs pre-war $68 · Each $10↑ = +50bps CAD</div>
+  </div>
+</div>
+
+<div class="section-label">NSE sector performance — 29 April intraday</div>
 <div class="chart-card">
-  <div class="chart-title">Key index returns, 27 April 2026</div>
-  <div style="position:relative;width:100%;height:210px;">
-    <canvas id="perf" role="img" aria-label="Bar chart: Sensex +0.83%, Nifty +0.81%, Nasdaq +0.20%, S&P500 +0.12%, Dow -0.13%, ASX -0.29%, CSI300 -0.28%, Hang Seng -0.61%">Monday index returns.</canvas>
+  <div class="chart-title">Nifty sector returns today (%)</div>
+  <div style="position:relative;width:100%;height:240px;">
+    <canvas id="sector" role="img" aria-label="Horizontal bar chart showing NSE sector performance on April 29 2026">NSE sector performance.</canvas>
   </div>
   <div class="legend">
-    <span><b style="background:#2a7035;"></b>Positive</span>
-    <span><b style="background:#a82828;"></b>Negative</span>
+    <span><b style="background:#2a7035;"></b>Gaining</span>
+    <span><b style="background:#a82828;"></b>Losing</span>
   </div>
 </div>
 
-<div class="section-label">Brent crude trajectory — $/bbl</div>
+<div class="section-label">Nifty 50 — 5-day trajectory</div>
 <div class="chart-card">
-  <div class="chart-title">Brent since Iran war began (28 Feb) with EIA Q2 peak forecast</div>
+  <div class="chart-title">Nifty 50 closing levels, Apr 23–29 2026</div>
   <div style="position:relative;width:100%;height:190px;">
-    <canvas id="oil" role="img" aria-label="Line chart showing Brent crude rising from ~$68 at war start to $106 now, with a dashed EIA forecast line reaching $115 in Q2 2026">Brent crude price trajectory.</canvas>
+    <canvas id="nifty5d" role="img" aria-label="Line chart showing Nifty 50 from ~23555 on Apr 23 rising to 24233 today">Nifty 5-day price chart.</canvas>
   </div>
-  <div style="font-size:11px;color:#888780;margin-top:8px;text-align:center;">Dashed = EIA forecast &nbsp;·&nbsp; Goldman Sachs raised late-2026 Brent target to $90/bbl from $80</div>
+  <div style="font-size:11px;color:#888780;margin-top:8px;text-align:center;">Today's bar = intraday level as of morning session</div>
 </div>
 
 <div class="section-label">Key watch points today</div>
@@ -167,103 +219,91 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
   <div class="theme">
     <div class="num">1</div>
     <div>
-      <div class="t-title">Iran peace talks</div>
-      <div class="t-body">Trump rejected Iran's Hormuz reopening proposal overnight — it didn't address the nuclear programme. A genuine deal = equities rally 2–4%, Brent drops $15–20, INR strengthens. Escalation = stagflation risk deepens.</div>
+      <div class="t-title">US-Iran war: UAE exits OPEC &amp; Hormuz risk premium</div>
+      <div class="t-body">The war completes its second month. UAE signalled it will exit OPEC in May — a seismic geopolitical realignment. Brent at $111/bbl. A genuine Hormuz deal could slash Brent $15–20; further escalation deepens India's stagflation risk via elevated CAD and imported inflation.</div>
     </div>
   </div>
   <div class="theme">
     <div class="num">2</div>
     <div>
-      <div class="t-title">US megacap earnings week</div>
-      <div class="t-body">Apple, Microsoft, Amazon, Alphabet, Meta all report this week. These 5 names = ~25% of S&P 500 market cap. Watch guidance on AI capex and any cost-pressure commentary from elevated energy/logistics.</div>
+      <div class="t-title">US megacap earnings — Meta reports today</div>
+      <div class="t-body">Meta reports after US market close today; Apple, Amazon, and others follow later this week. These 5 names account for ~25% of S&amp;P 500 market cap. Watch AI capex guidance and any cost-pressure commentary from elevated energy/logistics — it will drive near-term US and global sentiment.</div>
     </div>
   </div>
   <div class="theme">
     <div class="num">3</div>
     <div>
-      <div class="t-title">India Q4 FY26 earnings &amp; INR</div>
-      <div class="t-body">Full earnings season underway (Coal India, Axis Bank recent). USD/INR at 94+ squeezes import-heavy sectors. Each $10 Brent rise adds ~40–50bps to India's current account deficit.</div>
+      <div class="t-title">India Q4 FY26 earnings season &amp; Nifty recovery</div>
+      <div class="t-body">Nifty is up ~238 pts today, reclaiming 24,200. Q4 results continue — sector mix matters. Brokerages have cut Nifty targets citing oil risks; a selective approach is favoured, with Goldman Sachs preferring financials, staples, and telecom over energy-sensitive sectors.</div>
     </div>
   </div>
   <div class="theme">
     <div class="num">4</div>
     <div>
-      <div class="t-title">RBI &amp; monsoon risk</div>
-      <div class="t-body">Repo on hold at 5.25%, neutral stance. Rate cut window has narrowed significantly. El Niño risk flagged by RBI — IMD pre-season monsoon forecast is imminent and critical for food price trajectory.</div>
+      <div class="t-title">INR pressure &amp; Fed higher-for-longer</div>
+      <div class="t-body">USD/INR at 94.77 (+14% vs year-ago ~83) is squeezing import-heavy corporates. US 10Y at 4.35% and rising on sticky core inflation. No Fed cut expected in May or June. Persistent oil above $95 has priced out most 2026 cuts; further INR weakness could force RBI to tighten liquidity.</div>
     </div>
   </div>
   <div class="theme">
     <div class="num">5</div>
     <div>
-      <div class="t-title">Fed &amp; higher-for-longer</div>
-      <div class="t-body">US 10Y at 4.34% and creeping up. No Fed cut expected in May. Persistent oil above $95 has effectively priced out most 2026 cuts. Further curve steepening would pressure bank margins and growth.</div>
+      <div class="t-title">IMD monsoon forecast &amp; food inflation watch</div>
+      <div class="t-body">RBI repo on hold at 5.25%; rate-cut window has narrowed. IMD pre-season monsoon forecast is imminent — this is the single most important domestic macro signal of the week. A below-normal forecast would re-ignite food price fears and close the rate-cut window entirely for H1 FY27.</div>
     </div>
   </div>
 </div>
 
 <script>
 (function() {
-  const perfCtx = document.getElementById('perf').getContext('2d');
-  const labels = ['Sensex','Nifty 50','Nasdaq','S&P 500','Dow Jones','CSI 300','ASX 200','Hang Seng'];
-  const vals = [0.83, 0.81, 0.20, 0.12, -0.13, -0.28, -0.29, -0.61];
-  const colors = vals.map(v => v >= 0 ? '#2a7035' : '#a82828');
-  new Chart(perfCtx, {
+  // Sector performance horizontal bar chart
+  const sectorCtx = document.getElementById('sector').getContext('2d');
+  const sectorLabels = ['Nifty Auto','Nifty Media','Nifty Pharma','Nifty IT','Nifty FMCG','Nifty Realty','Nifty PSU Bank','Nifty Metal'];
+  const sectorVals = [0.95, 0.67, 0.61, 0.54, 0.43, -0.12, -0.28, -0.38];
+  const sectorColors = sectorVals.map(v => v >= 0 ? '#2a7035' : '#a82828');
+  new Chart(sectorCtx, {
     type: 'bar',
     data: {
-      labels,
-      datasets: [{ data: vals, backgroundColor: colors, borderColor: colors, borderWidth: 0, borderRadius: 4 }]
+      labels: sectorLabels,
+      datasets: [{ data: sectorVals, backgroundColor: sectorColors, borderColor: sectorColors, borderWidth: 0, borderRadius: 4 }]
     },
     options: {
+      indexAxis: 'y',
       responsive: true, maintainAspectRatio: false,
       plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => (c.raw > 0 ? '+' : '') + c.raw.toFixed(2) + '%' } } },
       scales: {
-        x: { grid: { display: false }, ticks: { font: { size: 11 }, color: '#888780', maxRotation: 25 }, border: { color: '#e8e5de' } },
-        y: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: { size: 11 }, color: '#888780', callback: v => (v > 0 ? '+' : '') + v.toFixed(1) + '%' }, border: { color: '#e8e5de' } }
+        x: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: { size: 11 }, color: '#888780', callback: v => (v > 0 ? '+' : '') + v.toFixed(1) + '%' }, border: { color: '#e8e5de' } },
+        y: { grid: { display: false }, ticks: { font: { size: 11 }, color: '#5a5955' }, border: { color: '#e8e5de' } }
       }
     }
   });
 
-  const oilCtx = document.getElementById('oil').getContext('2d');
-  const oilX = ['Feb 28','Mar 4','Mar 10','Mar 20','Apr 1','Apr 8','Apr 15','Apr 24','Apr 27','Q2 fcst'];
-  const actual = [68, 75, 95, 112, 103, 100, 102, 104, 106, null];
-  const fcst   = [null, null, null, null, null, null, null, null, 106, 115];
-  new Chart(oilCtx, {
+  // Nifty 5-day line chart
+  const niftyCtx = document.getElementById('nifty5d').getContext('2d');
+  const niftyLabels = ['Apr 23','Apr 24','Apr 25','Apr 27','Apr 28','Apr 29'];
+  const niftyVals = [23555, 23700, null, 24093, 23996, 24233];
+  new Chart(niftyCtx, {
     type: 'line',
     data: {
-      labels: oilX,
-      datasets: [
-        {
-          label: 'Brent actual',
-          data: actual,
-          borderColor: '#c47a15',
-          backgroundColor: 'rgba(196,122,21,0.07)',
-          borderWidth: 2,
-          pointRadius: 3,
-          pointBackgroundColor: '#c47a15',
-          fill: true,
-          tension: 0.35,
-          spanGaps: false
-        },
-        {
-          label: 'EIA forecast',
-          data: fcst,
-          borderColor: '#c47a15',
-          borderDash: [6, 4],
-          borderWidth: 1.5,
-          pointRadius: [0,0,0,0,0,0,0,0,0,4],
-          pointBackgroundColor: '#c47a15',
-          fill: false,
-          tension: 0.3,
-          spanGaps: false
-        }
-      ]
+      labels: niftyLabels,
+      datasets: [{
+        label: 'Nifty 50',
+        data: niftyVals,
+        borderColor: '#4a6fa5',
+        backgroundColor: 'rgba(74,111,165,0.07)',
+        borderWidth: 2,
+        pointRadius: [3,3,0,3,3,4],
+        pointBackgroundColor: '#4a6fa5',
+        fill: true,
+        tension: 0.35,
+        spanGaps: false
+      }]
     },
     options: {
       responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.raw != null ? '$' + c.raw + '/bbl' : '' } } },
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.raw != null ? 'Nifty ' + c.raw.toLocaleString() : '' } } },
       scales: {
-        x: { grid: { display: false }, ticks: { font: { size: 11 }, color: '#888780', maxRotation: 25 }, border: { color: '#e8e5de' } },
-        y: { min: 60, grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: { size: 11 }, color: '#888780', callback: v => '$' + v }, border: { color: '#e8e5de' } }
+        x: { grid: { display: false }, ticks: { font: { size: 11 }, color: '#888780', maxRotation: 0 }, border: { color: '#e8e5de' } },
+        y: { min: 23300, grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: { size: 11 }, color: '#888780', callback: v => v.toLocaleString() }, border: { color: '#e8e5de' } }
       }
     }
   });
