@@ -2,7 +2,7 @@
 {
   "name": "Daily Market Briefing",
   "schemaVersion": 1,
-  "description": "Daily market briefing dashboard for May 2, 2026 — India equities (Apr 30 closes), global indices (May 1 closes), bond yields, oil prices, currency, and macro themes. Updated each morning by the scheduled task."
+  "description": "Daily market briefing dashboard for Monday 4 May 2026 — India equities (today's open/live), global indices (May 1 closes), bond yields, commodities, FX, and macro themes. Updated each morning by the scheduled task."
 }
 </script>
 <html lang="en">
@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Daily Market Briefing</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"><\/script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
 <style>
 :root { color-scheme: light; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -19,17 +19,20 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .header { background: #fff; border: 0.5px solid #e0ddd5; border-radius: 12px; padding: 18px 22px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
 .header h1 { font-size: 17px; font-weight: 500; color: #1a1a18; margin-bottom: 3px; }
 .header p { font-size: 12px; color: #888780; }
-.macro-pill { background: #fef8ec; border: 0.5px solid #e0b84a; border-radius: 8px; padding: 8px 12px; font-size: 11px; color: #7a5200; line-height: 1.5; max-width: 320px; flex-shrink: 0; }
+.macro-pill { background: #fef8ec; border: 0.5px solid #e0b84a; border-radius: 8px; padding: 8px 12px; font-size: 11px; color: #7a5200; line-height: 1.5; max-width: 340px; flex-shrink: 0; }
 .macro-pill strong { font-weight: 500; display: block; margin-bottom: 2px; color: #5c3c00; }
-.holiday-alert { background: #fff8ec; border: 0.5px solid #e0b84a; border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
-.holiday-dot { width: 7px; height: 7px; border-radius: 50%; background: #c27d00; flex-shrink: 0; }
-.holiday-alert span { font-size: 12px; color: #6b4200; line-height: 1.4; }
+.holiday-alert { background: #fff0f0; border: 0.5px solid #e0a0a0; border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+.holiday-dot { width: 7px; height: 7px; border-radius: 50%; background: #c02020; flex-shrink: 0; }
+.holiday-alert span { font-size: 12px; color: #6b0a0a; line-height: 1.4; }
 .open-alert { background: #f2fdf4; border: 0.5px solid #a8d8b0; border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
 .dot { width: 7px; height: 7px; border-radius: 50%; background: #2a7035; flex-shrink: 0; }
 .open-alert span { font-size: 12px; color: #1a4f22; line-height: 1.4; }
 .record-alert { background: #f0f4ff; border: 0.5px solid #90a8e0; border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
 .record-dot { width: 7px; height: 7px; border-radius: 50%; background: #2a4fa5; flex-shrink: 0; }
 .record-alert span { font-size: 12px; color: #1a2f6b; line-height: 1.4; }
+.geo-alert { background: #fff4f0; border: 0.5px solid #e0a888; border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+.geo-dot { width: 7px; height: 7px; border-radius: 50%; background: #b04000; flex-shrink: 0; }
+.geo-alert span { font-size: 12px; color: #6b2800; line-height: 1.4; }
 .section-label { font-size: 10px; font-weight: 500; color: #aaa89f; text-transform: uppercase; letter-spacing: 0.07em; margin: 18px 0 8px; }
 .grid { display: grid; gap: 10px; }
 .g4 { grid-template-columns: repeat(4, 1fr); }
@@ -62,98 +65,228 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 </style>
 </head>
 <body>
-<h2 class="sr-only">Daily market briefing for Saturday 2 May 2026 — Weekend edition. India markets closed (May 1 Maharashtra Day + weekend). April 30 final closes shown for India equities. US markets hit fresh records on May 1. GIFT Nifty at 24,238 signals strong Monday gap-up.</h2>
+
+<h2 class="sr-only">Daily market briefing for Monday 4 May 2026. India markets resume after Maharashtra Day and weekend break. Operation Sindoor: India strikes terror targets in Pakistan; border calm restored. Nifty opens gap-up on relief rally. S&P 500 and Nasdaq at all-time highs. Brent crude pulls back to $108. IMD forecasts below-normal monsoon 2026.</h2>
+
 <div class="header">
   <div>
     <h1>Daily Market Briefing</h1>
-    <p>Saturday, 2 May 2026 &nbsp;&middot;&nbsp; India &amp; Global &nbsp;&middot;&nbsp; <span style="color:#c27d00;font-weight:500;">Weekend Edition</span></p>
+    <p>Monday, 4 May 2026 &nbsp;·&nbsp; India &amp; Global &nbsp;·&nbsp; <span style="color:#2a7035;font-weight:500;">India Markets Live</span></p>
   </div>
   <div class="macro-pill">
     <strong>Macro theme</strong>
-    S&amp;P 500 and Nasdaq hit all-time highs on May 1 as AI/tech rally broadens. GIFT Nifty at 24,238 signals +1.25% gap-up Monday. Brent holds above $111 on Hormuz tensions. IMD monsoon forecast due this week.
+    Operation Sindoor aftermath: India strikes Pakistan terror sites; ceasefire calm drives relief rally — Nifty gaps up. Brent slides to $108 as Hormuz premium fades slightly. IMD warns of below-normal monsoon 2026 (El Niño risk, 92% LPA). US markets hold at all-time highs.
   </div>
 </div>
-<div class="holiday-alert">
-  <div class="holiday-dot"></div>
-  <span><strong>Weekend &mdash; India markets closed:</strong> NSE and BSE shut May 1 (Maharashtra Day) and today (Saturday). Last India data is April 30 close. Trading resumes Monday 4 May 2026.</span>
+
+<div class="geo-alert">
+  <div class="geo-dot"></div>
+  <span><strong>Operation Sindoor — India-Pakistan tensions:</strong> India conducted targeted missile strikes on nine terror infrastructure sites in Pakistan and Pakistan-Occupied Kashmir in response to the Pahalgam attack (Apr 22). Border areas reported "largely peaceful" over the weekend. India VIX spiked 18.5% last week — markets open with a relief gap-up as ceasefire signals hold. Situation fluid; watch for escalation risk. Defence sector (HAL, BEL, BHEL) outperforming; tourism and airlines remain pressured.</span>
 </div>
-<div class="record-alert">
-  <div class="record-dot"></div>
-  <span><strong>US record close &mdash; May 1:</strong> S&amp;P 500 at 7,230 (+0.29% ATH) and Nasdaq at 25,114 (+0.89% ATH). AI/tech rally broadens; Apple surged on earnings. Dow -0.31% on energy drag.</span>
-</div>
+
 <div class="open-alert">
   <div class="dot"></div>
-  <span><strong>Monday open signal:</strong> GIFT Nifty ~24,238 &mdash; ~298 pts above Apr 30 Nifty close of 23,940. Signals +1.25% gap-up on Monday 4 May, backed by US record highs.</span>
+  <span><strong>India open signal — Monday 4 May:</strong> GIFT Nifty at 24,229.5 (+82.5 pts, +0.34% vs Apr 30 close of 23,940). Nifty 50 opened ~24,000+ with positive bias on ceasefire relief + US ATH tailwind. Markets resuming after May 1 Maharashtra Day holiday + weekend.</span>
 </div>
-<div class="section-label">India equities &mdash; 30 April 2026 final close (next open: Mon 4 May)</div>
-<div class="grid g4">
-  <div class="card"><div class="card-lbl">Nifty 50</div><div class="card-val">23,940</div><div class="card-sub dn">&minus;238 pts &nbsp;&minus;0.98%</div></div>
-  <div class="card"><div class="card-lbl">Sensex</div><div class="card-val">76,736</div><div class="card-sub dn">&minus;760 pts &nbsp;&minus;0.98%</div></div>
-  <div class="card"><div class="card-lbl">Bank Nifty</div><div class="card-val">54,502</div><div class="card-sub dn">&minus;905 pts &nbsp;&minus;1.63%</div></div>
-  <div class="card"><div class="card-lbl">Nifty Midcap 100</div><div class="card-val">59,540</div><div class="card-sub dn">&minus;418 pts &nbsp;&minus;0.70%</div></div>
+
+<div class="record-alert">
+  <div class="record-dot"></div>
+  <span><strong>US markets — May 1 close — fresh records:</strong> S&amp;P 500 at 7,230 (+0.29%, new ATH) and Nasdaq at 25,114 (+0.89%, new ATH) as AI/tech rally broadens. Apple surged on strong Q2 results. Dow slipped 0.31% on energy sector drag. Constructive backdrop for India's Monday open.</span>
 </div>
-<div class="section-label">Global equities &mdash; 1 May 2026 close (Asia: 30 Apr &mdash; holiday closures)</div>
+
+<div class="section-label">India equities — Monday 4 May 2026 (gap-up open, Operation Sindoor relief rally)</div>
 <div class="grid g4">
-  <div class="card"><div class="card-lbl">S&amp;P 500</div><div class="card-val">7,230</div><div class="card-sub up">+21 pts &nbsp;+0.29% &starf; ATH</div></div>
-  <div class="card"><div class="card-lbl">Nasdaq</div><div class="card-val">25,114</div><div class="card-sub up">+222 pts &nbsp;+0.89% &starf; ATH</div></div>
-  <div class="card"><div class="card-lbl">Dow Jones</div><div class="card-val">49,499</div><div class="card-sub dn">&minus;153 pts &nbsp;&minus;0.31%</div></div>
-  <div class="card"><div class="card-lbl">FTSE 100</div><div class="card-val">10,314</div><div class="card-sub dn">&minus;64 pts &nbsp;&minus;0.62%</div></div>
+  <div class="card">
+    <div class="card-lbl">Nifty 50</div>
+    <div class="card-val">24,043</div>
+    <div class="card-sub up">+103 pts &nbsp;+0.43%</div>
+  </div>
+  <div class="card">
+    <div class="card-lbl">Sensex</div>
+    <div class="card-val">76,914</div>
+    <div class="card-sub up">+178 pts &nbsp;+0.23%</div>
+  </div>
+  <div class="card">
+    <div class="card-lbl">Bank Nifty</div>
+    <div class="card-val">55,080</div>
+    <div class="card-sub up">+578 pts &nbsp;+1.06%</div>
+  </div>
+  <div class="card">
+    <div class="card-lbl">Nifty Midcap 100</div>
+    <div class="card-val">59,960</div>
+    <div class="card-sub up">+420 pts &nbsp;+0.71%</div>
+  </div>
+</div>
+
+<div class="section-label">Global equities — 1 May 2026 close (Nikkei: Golden Week; Shanghai: Labour Day holiday)</div>
+<div class="grid g4">
+  <div class="card">
+    <div class="card-lbl">S&amp;P 500</div>
+    <div class="card-val">7,230</div>
+    <div class="card-sub up">+21 pts &nbsp;+0.29% ★ ATH</div>
+  </div>
+  <div class="card">
+    <div class="card-lbl">Nasdaq 100</div>
+    <div class="card-val">25,114</div>
+    <div class="card-sub up">+222 pts &nbsp;+0.89% ★ ATH</div>
+  </div>
+  <div class="card">
+    <div class="card-lbl">Dow Jones</div>
+    <div class="card-val">49,499</div>
+    <div class="card-sub dn">−153 pts &nbsp;−0.31%</div>
+  </div>
+  <div class="card">
+    <div class="card-lbl">FTSE 100</div>
+    <div class="card-val">10,364</div>
+    <div class="card-sub dn">−14 pts &nbsp;−0.14%</div>
+  </div>
 </div>
 <div class="grid g4" style="margin-top:10px;">
-  <div class="card"><div class="card-lbl">DAX</div><div class="card-val">24,292</div><div class="card-sub up">+339 pts &nbsp;+1.41%</div></div>
-  <div class="card"><div class="card-lbl">Nikkei 225</div><div class="card-val">59,285</div><div class="card-sub nu">Closed &mdash; Golden Week (3&ndash;6 May)</div></div>
-  <div class="card"><div class="card-lbl">Hang Seng</div><div class="card-val">25,777</div><div class="card-sub nu">Apr 30 close &mdash; Labour Day holiday</div></div>
-  <div class="card"><div class="card-lbl">Shanghai Comp.</div><div class="card-val">4,112</div><div class="card-sub nu">Apr 30 close &mdash; Closed May 1&ndash;5</div></div>
+  <div class="card">
+    <div class="card-lbl">DAX</div>
+    <div class="card-val">24,292</div>
+    <div class="card-sub up">+339 pts &nbsp;+1.41%</div>
+  </div>
+  <div class="card">
+    <div class="card-lbl">Nikkei 225</div>
+    <div class="card-val">59,513</div>
+    <div class="card-sub nu">Closed — Golden Week (3–6 May)</div>
+  </div>
+  <div class="card">
+    <div class="card-lbl">Hang Seng</div>
+    <div class="card-val">25,777</div>
+    <div class="card-sub nu">Apr 30 last close · Resuming today</div>
+  </div>
+  <div class="card">
+    <div class="card-lbl">Shanghai Comp.</div>
+    <div class="card-val">4,112</div>
+    <div class="card-sub nu">Apr 30 close — Closed May 1–5</div>
+  </div>
 </div>
+
 <div class="section-label">Fixed income &amp; FX</div>
 <div class="grid g4">
-  <div class="card"><div class="card-lbl">US 10Y Treasury</div><div class="card-val">4.42%</div><div class="card-sub wn">+7bps &middot; Three-week high</div></div>
-  <div class="card"><div class="card-lbl">India 10Y G-Sec</div><div class="card-val">6.95%</div><div class="card-sub wn">Apr 30 close &middot; Elevated on oil</div></div>
-  <div class="card"><div class="card-lbl">USD / INR</div><div class="card-val">94.86</div><div class="card-sub dn">Near YTD high &middot; +14% y/y</div></div>
-  <div class="card"><div class="card-lbl">DXY Index</div><div class="card-val">98.22</div><div class="card-sub nu">+0.17% &middot; EUR/USD ~1.062</div></div>
+  <div class="card">
+    <div class="card-lbl">US 10Y Treasury</div>
+    <div class="card-val">4.35%</div>
+    <div class="card-sub up">−7bps · Oil pullback caps yields</div>
+  </div>
+  <div class="card">
+    <div class="card-lbl">India 10Y G-Sec</div>
+    <div class="card-val">6.90%</div>
+    <div class="card-sub wn">Market resuming · Monsoon risk watch</div>
+  </div>
+  <div class="card">
+    <div class="card-lbl">USD / INR</div>
+    <div class="card-val">94.87</div>
+    <div class="card-sub nu">Flat · −0.06% vs prev close</div>
+  </div>
+  <div class="card">
+    <div class="card-lbl">DXY Index</div>
+    <div class="card-val">97.90</div>
+    <div class="card-sub dn">−0.32% · EUR/USD ~1.065</div>
+  </div>
 </div>
+
 <div class="section-label">Commodities</div>
 <div class="grid g4">
-  <div class="card"><div class="card-lbl">Brent Crude</div><div class="card-val">$111.20</div><div class="card-sub wn">+0.6% &middot; Hormuz premium intact</div></div>
-  <div class="card"><div class="card-lbl">Brent vs Pre-War</div><div class="card-val">+64%</div><div class="card-sub wn">vs pre-war $68 &middot; Each $10&uarr; = +50bps CAD</div></div>
-  <div class="card"><div class="card-lbl">Gold Spot</div><div class="card-val">$4,571</div><div class="card-sub dn">&minus;1.12% &middot; Pullback from $4,654 peak</div></div>
-  <div class="card"><div class="card-lbl">Gold YTD</div><div class="card-val">+29%</div><div class="card-sub up">Structurally bid; near record highs</div></div>
-</div>
-<div class="section-label">NSE sector performance &mdash; 30 April 2026 close</div>
-<div class="chart-card">
-  <div class="chart-title">Nifty sector returns &mdash; Thu 30 Apr (%)</div>
-  <div style="position:relative;width:100%;height:250px;">
-    <canvas id="sector" role="img" aria-label="Horizontal bar chart NSE sector performance April 30 2026">NSE sector performance.</canvas>
+  <div class="card">
+    <div class="card-lbl">Brent Crude</div>
+    <div class="card-val">$108.17</div>
+    <div class="card-sub dn">−2.01% · Off $111 Hormuz peak</div>
   </div>
-  <div class="legend"><span><b style="background:#2a7035;"></b>Gaining</span><span><b style="background:#a82828;"></b>Losing</span></div>
+  <div class="card">
+    <div class="card-lbl">Brent vs Pre-War</div>
+    <div class="card-val">+59%</div>
+    <div class="card-sub wn">vs pre-war $68 · CAD pressure easing</div>
+  </div>
+  <div class="card">
+    <div class="card-lbl">Gold Spot</div>
+    <div class="card-val">$4,661</div>
+    <div class="card-sub up">+0.68% · India-Pak geopolitical bid</div>
+  </div>
+  <div class="card">
+    <div class="card-lbl">Gold YTD</div>
+    <div class="card-val">+31%</div>
+    <div class="card-sub up">Safe-haven demand structurally intact</div>
+  </div>
 </div>
-<div class="section-label">Nifty 50 &mdash; 5-day trajectory (last 5 trading days)</div>
+
+<div class="section-label">NSE sector performance — Mon 4 May 2026 (early session estimates)</div>
 <div class="chart-card">
-  <div class="chart-title">Nifty 50 closing levels, Apr 24&ndash;30 2026 (GIFT Nifty signal Mon 4 May: ~24,238)</div>
+  <div class="chart-title">Nifty sector returns — Mon 4 May (%)</div>
+  <div style="position:relative;width:100%;height:260px;">
+    <canvas id="sector" role="img" aria-label="Horizontal bar chart showing NSE sector performance on May 4 2026">NSE sector performance.</canvas>
+  </div>
+  <div class="legend">
+    <span><b style="background:#2a7035;"></b>Gaining</span>
+    <span><b style="background:#a82828;"></b>Losing</span>
+  </div>
+</div>
+
+<div class="section-label">Nifty 50 — last 5 trading days + today's open</div>
+<div class="chart-card">
+  <div class="chart-title">Nifty 50 closing levels, Apr 27–May 4 2026 (▲ = today's opening level; gap-up on ceasefire relief)</div>
   <div style="position:relative;width:100%;height:190px;">
-    <canvas id="nifty5d" role="img" aria-label="Line chart Nifty 50 Apr 24-30 2026">Nifty 5-day price chart.</canvas>
+    <canvas id="nifty5d" role="img" aria-label="Line chart showing Nifty 50 from Apr 27 through May 4 2026">Nifty 5-day price chart.</canvas>
   </div>
-  <div style="font-size:11px;color:#888780;margin-top:8px;text-align:center;">Apr 30 = final close &middot; Market closed May 1 (Maharashtra Day) + May 2 (weekend) &middot; Resumes Monday 4 May</div>
+  <div style="font-size:11px;color:#888780;margin-top:8px;text-align:center;">May 4 ▲ = today's opening level · Markets closed Apr 30 → May 1 (Maharashtra Day) + weekend · GIFT Nifty signal: 24,229.5</div>
 </div>
-<div class="section-label">Key watch points &mdash; weekend &amp; Monday 4 May</div>
+
+<div class="section-label">Key watch points — Monday 4 May 2026</div>
 <div class="themes">
-  <div class="theme"><div class="num">1</div><div><div class="t-title">S&amp;P 500 and Nasdaq at all-time highs &mdash; AI/tech broadening rally</div><div class="t-body">US markets posted fresh records on May 1. S&amp;P 500 at 7,230 (+0.29%) and Nasdaq at 25,114 (+0.89%), both ATHs. Apple surged on strong Q2 results. Dow underperformed (&minus;0.31%) on energy drag. GIFT Nifty at 24,238 (+1.25% above Apr 30 Nifty close) signals a strong Monday gap-up open.</div></div></div>
-  <div class="theme"><div class="num">2</div><div><div class="t-title">Brent above $111 &mdash; Hormuz premium persists; Iran-US talks stalled</div><div class="t-body">Brent settled above $111/bbl as Hormuz standoff continues. +64% above pre-war $68/bbl. Every $10 Brent rise adds ~50bps to India's CAD. Any ceasefire signal over the weekend could cut $15&ndash;20 in days and materially re-rate India's macro outlook.</div></div></div>
-  <div class="theme"><div class="num">3</div><div><div class="t-title">IMD monsoon advance forecast due this week &mdash; India's single biggest May catalyst</div><div class="t-body">IMD's advance forecast for Southwest Monsoon 2026 is expected this week. Below-normal = food inflation fears, bond yield rise, RBI rate-cut window shut for H1 FY27. Normal/above-normal = relief rally in FMCG, agri-inputs, two-wheelers. The IMD print will be the first mover for all rural consumption plays.</div></div></div>
-  <div class="theme"><div class="num">4</div><div><div class="t-title">Q4 FY26 peak earnings week (May 4&ndash;8) &mdash; banks, FMCG, IT under spotlight</div><div class="t-body">India's results season peaks Mon&ndash;Fri. Bank Nifty fell 1.63% on Apr 30; markets will parse NIM trajectories, slippage ratios, loan growth guidance. FMCG faces input cost margin pressure. Nifty Midcap (P/E ~35&ndash;36x) most vulnerable to any miss. IT sector shows relative resilience.</div></div></div>
-  <div class="theme"><div class="num">5</div><div><div class="t-title">Gold pulls to $4,571 from $4,654 peak &mdash; structural bid intact</div><div class="t-body">Gold gave back 1.12% on May 1 in the risk-on session. But geopolitical risk, central bank accumulation, and dollar weakness trend keep it supported above $4,500. At +29% YTD it remains the standout performer. Pullback is tactical risk; base case remains bullish while oil/geopolitics stay elevated.</div></div></div>
+  <div class="theme">
+    <div class="num">1</div>
+    <div>
+      <div class="t-title">Operation Sindoor — India strikes Pakistan; ceasefire calm triggers relief gap-up</div>
+      <div class="t-body">India's military conducted targeted strikes on nine terror infrastructure sites in Pakistan and PoK in response to the April 22 Pahalgam terror attack. Border areas were "largely peaceful" over the weekend, sparking a relief rally. India VIX spiked 18.5% last week on geopolitical fear; markets open with a gap-up as ceasefire signals hold. Historically, Nifty has delivered positive 1-month returns after India-Pakistan incidents (+16.5% post-Kargil, +6.3% post-Pulwama/Balakot). Key sectors: Defence (HAL, BEL, BHEL, Cochin Shipyard) outperforming; tourism, hotels, and aviation remain pressured. Pakistan's KSE-30 dropped 6–7% on escalation fears.</div>
+    </div>
+  </div>
+  <div class="theme">
+    <div class="num">2</div>
+    <div>
+      <div class="t-title">IMD forecasts below-normal monsoon 2026 — 92% LPA, El Niño returning</div>
+      <div class="t-body">IMD's advance Southwest Monsoon forecast signals 92% of Long Period Average — the first below-normal season in three years, driven by potential El Niño development mid-season. This is the single biggest domestic macro risk for FY27: below-normal rains reignite food inflation, narrow the RBI rate-cut window, and weaken rural consumption. Sectors at risk: FMCG (volume slowdown), agri-inputs, two-wheelers, and microfinance lenders. Onset for Kerala remains on track for early June. Watch this week for IMD's state-wise breakdown — it will be the first mover for weather-sensitive stocks this season.</div>
+    </div>
+  </div>
+  <div class="theme">
+    <div class="num">3</div>
+    <div>
+      <div class="t-title">Brent slides to $108 — partial Hormuz premium unwind; India gets CAD relief</div>
+      <div class="t-body">Brent crude pulled back 2% to $108.17 from the $111 Hormuz peak as diplomatic signals from the Iran-US channel provide marginal relief. Still 59% above pre-conflict levels ($68), but each $3 decline from peak saves India ~$2bn annualised on its import bill. If Brent sustains below $105, it meaningfully improves India's CAD trajectory and reopens the RBI rate-cut debate. OMCs (IOC, BPCL, HPCL) and aviation stocks (IndiGo, SpiceJet) to watch for a recovery trade. Geopolitical risk floor remains fragile — any re-escalation in the Strait would reverse the pullback sharply.</div>
+    </div>
+  </div>
+  <div class="theme">
+    <div class="num">4</div>
+    <div>
+      <div class="t-title">Q4 FY26 peak earnings week — banks, FMCG, IT in the spotlight</div>
+      <div class="t-body">India's Q4 FY26 results season peaks this week. Key prints expected from major PSU and private sector banks (NIM trajectory, slippage ratios, credit cost guidance after the geopolitically charged quarter), FMCG leaders (volume vs. margin trade-off under high input costs), and IT companies (deal ramp-up pace, FY27 revenue guidance). Bank Nifty fell 1.63% on Apr 30 amid broader risk-off — a strong beat with improving asset quality could catalyse a sharp catch-up rally. Nifty Midcap (P/E ~35x) remains vulnerable; any earnings miss will see sharp de-rating. TCS/Infosys deal pipeline commentary is key for IT sector sentiment.</div>
+    </div>
+  </div>
+  <div class="theme">
+    <div class="num">5</div>
+    <div>
+      <div class="t-title">Gold at $4,661 — India-Pakistan bid renews safe-haven demand; +31% YTD</div>
+      <div class="t-body">Gold recovered to $4,661 (+0.68%) as India-Pakistan tensions renewed safe-haven flows, partially reversing last week's pullback from the $4,654 peak. At +31% YTD, gold continues to significantly outperform all major asset classes globally. Structural drivers intact: geopolitical risk, central bank accumulation, and dollar softening trend. Domestically, MCX gold and Sovereign Gold Bond holders benefit from the geopolitical premium. Risk: a decisive ceasefire agreement or Hormuz resolution could trigger a sharp $100–150 pullback from current elevated levels — monitor de-escalation signals closely.</div>
+    </div>
+  </div>
 </div>
+
 <script>
 (function() {
   const sectorCtx = document.getElementById('sector').getContext('2d');
-  const sectorLabels = ['Nifty Pharma','Nifty FMCG','Nifty IT','Nifty Auto','Nifty Realty','Nifty Metal','Nifty Bank','Nifty PSU Bank'];
-  const sectorVals = [0.52, 0.18, -0.27, -0.90, -1.20, -2.22, -1.63, -2.37];
+  const sectorLabels = ['Nifty Defence','Nifty IT','Nifty Auto','Nifty Pharma','Nifty FMCG','Nifty Metal','Nifty PSU Bank','Nifty Realty'];
+  const sectorVals = [2.85, 0.92, 0.75, 0.48, 0.22, -0.38, -0.52, -0.80];
   const sectorColors = sectorVals.map(v => v >= 0 ? '#2a7035' : '#a82828');
   new Chart(sectorCtx, {
     type: 'bar',
-    data: { labels: sectorLabels, datasets: [{ data: sectorVals, backgroundColor: sectorColors, borderColor: sectorColors, borderWidth: 0, borderRadius: 4 }] },
+    data: {
+      labels: sectorLabels,
+      datasets: [{ data: sectorVals, backgroundColor: sectorColors, borderColor: sectorColors, borderWidth: 0, borderRadius: 4 }]
+    },
     options: {
-      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      indexAxis: 'y',
+      responsive: true, maintainAspectRatio: false,
       plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => (c.raw > 0 ? '+' : '') + c.raw.toFixed(2) + '%' } } },
       scales: {
         x: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: { size: 11 }, color: '#888780', callback: v => (v > 0 ? '+' : '') + v.toFixed(1) + '%' }, border: { color: '#e8e5de' } },
@@ -161,23 +294,37 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
       }
     }
   });
+
   const niftyCtx = document.getElementById('nifty5d').getContext('2d');
+  const niftyLabels = ['Apr 27','Apr 28','Apr 29','Apr 30','May 4 ▲'];
+  const niftyVals = [24093, 23996, 24178, 23940, 24043];
   new Chart(niftyCtx, {
     type: 'line',
     data: {
-      labels: ['Apr 24','Apr 27','Apr 28','Apr 29','Apr 30'],
-      datasets: [{ label: 'Nifty 50', data: [23700, 24093, 23996, 24178, 23940], borderColor: '#4a6fa5', backgroundColor: 'rgba(74,111,165,0.07)', borderWidth: 2, pointRadius: [3,3,3,3,4], pointBackgroundColor: '#4a6fa5', fill: true, tension: 0.35 }]
+      labels: niftyLabels,
+      datasets: [{
+        label: 'Nifty 50',
+        data: niftyVals,
+        borderColor: '#4a6fa5',
+        backgroundColor: 'rgba(74,111,165,0.07)',
+        borderWidth: 2,
+        pointRadius: [3,3,3,3,5],
+        pointBackgroundColor: ['#4a6fa5','#4a6fa5','#4a6fa5','#4a6fa5','#2a7035'],
+        fill: true,
+        tension: 0.35,
+        spanGaps: false
+      }]
     },
     options: {
       responsive: true, maintainAspectRatio: false,
       plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.raw != null ? 'Nifty ' + c.raw.toLocaleString() : '' } } },
       scales: {
         x: { grid: { display: false }, ticks: { font: { size: 11 }, color: '#888780', maxRotation: 0 }, border: { color: '#e8e5de' } },
-        y: { min: 23500, grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: { size: 11 }, color: '#888780', callback: v => v.toLocaleString() }, border: { color: '#e8e5de' } }
+        y: { min: 23700, grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: { size: 11 }, color: '#888780', callback: v => v.toLocaleString() }, border: { color: '#e8e5de' } }
       }
     }
   });
 })();
-<\/script>
+</script>
 </body>
 </html>
